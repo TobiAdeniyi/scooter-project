@@ -15,18 +15,22 @@ sequenceDiagram
 
     activate scooter
     scooterApp ->> scooter: Unlock Scooter
+    deactivate scooter
 
     alt isBroken == True
+        activate scooter
         scooter -->> scooterApp: Request Repair
         scooterApp -->> user: Scooter out of Order, find another scooter
         deactivate scooter
     else isBroken != True
-        alt charge < 10
-            scooter -->> scooterApp: Cannot unlock scooter
-            scooterApp -->> user: Cannot rent scooter, find another scooter
-            deactivate scooter
-        else charge >= 10
-            Scooter -->> scooterApp: Scooter unlocked
-            scooterApp -->> user: Scooter successfully unlocked
-        end
+    end
+
+    alt isBroken != True and charge < 20
+        activate scooter
+        scooter -->> scooterApp: Cannot unlock scooter
+        scooterApp -->> user: Cannot rent scooter, find another scooter
+        deactivate scooter
+    else charge >= 20
+        Scooter -->> scooterApp: Scooter unlocked
+        scooterApp -->> user: Scooter successfully unlocked
     end

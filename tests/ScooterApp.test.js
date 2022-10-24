@@ -69,12 +69,14 @@ describe("user login", () => {
   })
 })
 
-// add scooter
-describe("add scooter", () => {
+// add and remove scooter
+describe("add and remove scooter", () => {
 
-})
+  test("add scooter", () => {
+    // TODO
+  })
 
-// remove scooter
-describe("remove scooter", () => {
-
+  test("remove scooter", () => {
+    // TODO
+  })
 })

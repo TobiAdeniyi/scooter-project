@@ -92,12 +92,15 @@ class Scooter{
     }
   }
 
-  recharge() {
+  async recharge() {
+    await new Promise(resolve => setTimeout(resolve, 2000));
     this._charge = 100
   }
 
-  requestRepair() {
-
+  async requestRepair() {
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    this._isBroken = false
+    console.log("repair has been completed.")
   }
 
 }
