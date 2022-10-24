@@ -50,11 +50,12 @@ class ScooterApp {
   }
 
   addScooter(location, scooter) {
-    // To be finished
+    scooter.station = location
+    ScooterApp.locations[location].push(scooter)
   }
 
   removeScooter(scooterToRemove) {
-    // To be finished
+    // TODO
   }
 }
 

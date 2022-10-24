@@ -67,11 +67,13 @@ describe('scooter methods', () => {
 
   test("rent scooter method that is broken", () => {
     scooter.isBroken = true
+    scooter.charge = 100
     expect(() => scooter.rent()).toThrow("Scooter is broken, please send a repair request.")
   })
 
   test("rent scooter method", () => {
     const logSpy = jest.spyOn(console, "log")
+    scooter.charge = 90
     scooter.rent()
     expect(logSpy).toHaveBeenCalledWith("Enjoy the ride!")
   })
@@ -91,13 +93,16 @@ describe('scooter methods', () => {
   })
 
   // requestRepair method
-  test("request repair method", () => {
-
+  test("request repair method", async () => {
+    scooter.requestRepair()
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    expect(scooter.isBroken).toBeFalsy()
   })
 
   // charge method
-  test("recharge scooter method", () => {
+  test("recharge scooter method", async () => {
     scooter.recharge()
+    await new Promise(resolve => setTimeout(resolve, 3000));
     expect(scooter.charge).toBe(100)
   })
 
