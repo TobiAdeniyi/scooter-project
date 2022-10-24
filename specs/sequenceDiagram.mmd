@@ -1,0 +1,32 @@
+sequenceDiagram
+
+    actor user
+    activate scooterApp
+
+    alt Login to scooterApp
+        user ->> scooterApp: Loging using User account
+        scooterApp -->> user: Login successfull
+    else Register to scooterApp
+        user ->> scooterApp: Register and Create User Account
+        scooterApp -->> user: Account created, Login successfull
+    end
+
+    user ->> scooterApp: Rent Scooter
+
+    activate scooter
+    scooterApp ->> scooter: Unlock Scooter
+
+    alt isBroken == True
+        scooter -->> scooterApp: Request Repair
+        scooterApp -->> user: Scooter out of Order, find another scooter
+        deactivate scooter
+    else isBroken != True
+        alt charge < 10
+            scooter -->> scooterApp: Cannot unlock scooter
+            scooterApp -->> user: Cannot rent scooter, find another scooter
+            deactivate scooter
+        else charge >= 10
+            Scooter -->> scooterApp: Scooter unlocked
+            scooterApp -->> user: Scooter successfully unlocked
+        end
+    end

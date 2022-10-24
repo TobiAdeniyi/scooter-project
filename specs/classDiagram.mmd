@@ -1,0 +1,35 @@
+classDiagram
+
+    User "1" -- "1" Scooter
+    ScooterApp "1" o-- "1" User
+    ScooterApp "1" o-- "*" Scooter
+
+    class User {
+        +str age
+        +str usrename
+        +str password
+    }
+
+    class Scooter {
+        -str serial
+        +int charge
+        +str station
+        +bool isBroken
+        +bool isDocked
+
+        +rent()
+        +dock(station)
+        +charge()
+        +requestRepair()
+    }
+
+    class ScooterApp {
+        +str station
+        +obj registeredUser
+        +obj scooterSession
+
+        +register(user)
+        +login(username, password)
+        +addScooter(location, scooter)
+        +removeScooter(scooterToRemove)
+    }
